@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace CliCommands.Packer.Task
 {
-    public class Ref : Microsoft.Build.Utilities.Task
+    public class RefAdd : Microsoft.Build.Utilities.Task
     {
         [Required]
         public string ProjectFile {get; set; }
@@ -21,9 +21,6 @@ namespace CliCommands.Packer.Task
 
         [Required]
         public string PackageVersion {get; set; }
-
-        public string Framework {get; set; }
-        public string Configuration { get; set; }
 
         private void AddOrUpdatePackageRef(string packageName, string packageVersion, ProjectRootElement proj)
         {            

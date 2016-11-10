@@ -40,7 +40,36 @@ namespace dotnetpacker
                         version = packageVersion.Value();
                     }
 
-                    var msbArguments = $"msbuild /t:Ref /p:PackageName={packageName.Value} /p:PackageVersion={version} /v:m";
+                    var msbArguments = $"msbuild /t:RefAdd /p:PackageName={packageName.Value} /p:PackageVersion={version} /v:m";
+                    
+                    var psi = new ProcessStartInfo
+                    {
+                        FileName = "dotnet",
+                        Arguments = msbArguments
+                    };
+
+                    var process = new Process
+                    {
+                        StartInfo = psi,
+                    };
+
+                    process.Start();
+
+                    return 1;
+                });
+                
+            });
+
+            cmd.Command("del", c =>
+            {
+                c.Description = "Delete package and project references";
+                c.HelpOption("-h|--help");
+
+                var packageName = c.Argument("[PACKAGE_NAME]", "The package name to remove");
+
+                c.OnExecute(() =>
+                {                    
+                    var msbArguments = $"msbuild /t:RefDel /p:PackageName={packageName.Value} /v:m";
                     
                     var psi = new ProcessStartInfo
                     {

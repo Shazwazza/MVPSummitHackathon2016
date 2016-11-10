@@ -16,9 +16,6 @@
       <Version>1.0.0-alpha-20161029-1</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="NewtonSoft.Json">
-      <Version>9.0.1</Version>
-    </PackageReference>
     <PackageReference Include="SampleTargets.PackerTarget">
       <Version>0.1.0-preview</Version>
       <PrivateAssets>All</PrivateAssets>

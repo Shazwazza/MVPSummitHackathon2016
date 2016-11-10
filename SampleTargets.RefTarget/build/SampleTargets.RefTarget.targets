@@ -1,12 +1,17 @@
 ﻿<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <UsingTask TaskName="Ref" AssemblyFile="$(MSBuildThisFileDirectory)SampleTargets.RefTarget.dll" />
+  <UsingTask TaskName="RefAdd" AssemblyFile="$(MSBuildThisFileDirectory)SampleTargets.RefTarget.dll" />
+  <UsingTask TaskName="RefDel" AssemblyFile="$(MSBuildThisFileDirectory)SampleTargets.RefTarget.dll" />
   
   <PropertyGroup>
     <ApplicationName>$(AssemblyName)</ApplicationName>
     <ApplicationName Condition="'$(AssemblyName)' == ''">$(MsBuildProjectName)</ApplicationName>
   </PropertyGroup>
 
-  <Target Name="Ref">
-    <Ref ProjectFile="$(MSBuildProjectFullPath)" PackageName="$(PackageName)" PackageVersion="$(PackageVersion)"   />
+  <Target Name="RefAdd">
+    <RefAdd ProjectFile="$(MSBuildProjectFullPath)" PackageName="$(PackageName)" PackageVersion="$(PackageVersion)"   />
+  </Target>
+
+  <Target Name="RefDel">
+    <RefDel ProjectFile="$(MSBuildProjectFullPath)" PackageName="$(PackageName)"  />
   </Target>
 </Project>
