@@ -27,9 +27,7 @@ namespace dotnetpacker
                 c.Description = "Add package and project references";
                 c.HelpOption("-h|--help");
 
-                var packageName = c.Option("-t|--type <PACKAGE_NAME>",
-                    "The package name to install",
-                    CommandOptionType.SingleValue);
+                var packageName = c.Argument("[PACKAGE_NAME]", "The package name to install");
 
                 var packageVersion = c.Option("-v|--version <PACKAGE_VERSION>",
                     "The package version to install",
@@ -37,7 +35,13 @@ namespace dotnetpacker
 
                 c.OnExecute(() =>
                 {
-                    var msbArguments = $"msbuild /t:Ref /p:PackageName={packageName.Value()} /p:PackageVersion={packageVersion.Value()} /v:m";
+                    var version = "*";
+                    if (packageVersion.HasValue()){
+                        version = packageVersion.Value();
+                    }
+
+                    var msbArguments = $"msbuild /t:Ref /p:PackageName={packageName.Value} /p:PackageVersion={version} /v:m";
+                    
                     var psi = new ProcessStartInfo
                     {
                         FileName = "dotnet",
