@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.Extensions.CommandLineUtils;
 
-namespace dotnetpacker
+namespace DotNetCliExtensions.Ref
 {
     class Program
     {
